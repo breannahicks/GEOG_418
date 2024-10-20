@@ -102,15 +102,7 @@ Income_noNA <- Municp[which(!is.na(Municp$`Median total income`)),]
 French_noNA <- Municp[which(!is.na(Municp$`PercFrench`)),]
 ```
 
-Next, we will take a closer look at the two variables we are interested in: Median total income and Percentage of respondents with French language knowledge. We will look at some descriptive stats and do a final check for NA values in the data.
-```{r NA Remove, echo=TRUE, eval=TRUE, warning=FALSE}
-#Remove Income NA
-Income_noNA <- Municp[which(!is.na(Municp$`Median total income`)),]
-
-#Remove French NA
-French_noNA <- Municp[which(!is.na(Municp$`PercFrench`)),]
-```
-Next, we will take a closer look at the two variables we are interested in: Median total income and Percentage of respondents with French language knowledge. We will look at some descriptive stats and do a final check for NA values in the data.
+This next step will produce some descriptive statistics of our Median total income variable and Percentage of respondents with French knowledge variable and double check that we have removed all NA values in these data.
 
 ```{r DescriptiveStats, echo=TRUE, eval=TRUE, warning=FALSE}
 #Calculate descriptive stats for Income
@@ -134,7 +126,7 @@ kable(data, caption = paste0("Descriptive statistics for Income and French Knowl
 ```
 ![image](https://github.com/user-attachments/assets/c2b10386-d5d6-4716-9b9e-ed0569870784)
 
-Describe how the map is created.
+Now we will produce a map for each of our two variables in the dissemination areas of our city (Fredericton). These maps will help us do some visual analysis of any point patterns present and give us more of an understanding of what our data looks like geographically. We will then present them side by side to compare the results.
 
 ```{r StudyArea, echo=TRUE, eval=TRUE, warning=FALSE, fig.cap="Fredericton census dissemination areas showing median total income (left) and percentage of respondants with knowledge of french (right)."}
 #Choose a pallete
@@ -168,9 +160,11 @@ tmap_arrange(map_Income, map_French, ncol = 2, nrow = 1)
 
 ## Neighbourhood matrix
 
-Describe the concept of a weighted neighbourhood matrix.
+A neighborhood matrix works to define the neighborhood of cells or census tracts that will be used to compare each value $(i)$ to. There are two neighborhoods that we will be examining which are the rook and queen. The rook neighborhood includes any census tracts that share an edge with the census tract $(i)$ (Anselin & Morrison, 2023). It is helpful to think about how a rook piece would move on a chess board. Alternatively, the queen neighborhood includes that of the rook and also any census tracts that have common vertices (Anselin & Morrison, 2023). Once again, it is helpful to think about how a queen piece moves on a chess board. Take a look at the figure below that outlines what these neighborhoods look like and try to think about what differences will be created in their outputs.
 
-The code to create a list of neighbours in R is very simple thanks to the poly2nb() function in the ‘spdep’ package. If we want to change from default queen weighting to rook weighting in our selection, we simply change the ‘queen = TRUE’ to ‘queen = FALSE’.
+![image](https://github.com/user-attachments/assets/4516aab6-7a3e-4f12-807a-0c36f0d793f7)
+
+The poly2nb() function in the ‘spdep’ package will give us a list of neighbors for both of our neighborhood schemes. The default weighting when using this function is the queen so to change to rook weight we will need to set ‘queen = FALSE’.
 
 ```{r Neighbours, echo=TRUE, eval=TRUE, warning=FALSE}
 
@@ -419,6 +413,8 @@ In these plots, the points with diamonds are considered statistically significan
 Provide a brief summary.
 
 ## References
+
+Anselin, L., & Morrison, G. (2023). Hands-on Spatial Data Science with R. Chapter 6 Contiguity-Based Spatial Weights. https://spatialanalysis.github.io/handsonspatialdata/contiguity-based-spatial-weights.html 
 
 ESRI. (n.d.). How spatial autocorrelation (Global Moran’s I) works. ArcGIS Pro. https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-statistics/h-how-spatial-autocorrelation-moran-s-i-spatial-st.htm
 
