@@ -229,11 +229,7 @@ tmap_arrange(IncomeQueen, IncomeRook, IncomeBoth, ncol = 3, nrow = 1)
 
 ![image](https://github.com/user-attachments/assets/ab246416-840b-4849-82cd-7c58534f6f55)
 
-Describe the code for the weighted matrix file.
-
-Weights are defined by “style” (ie. type), and can include “B”, “W”, and “C”. The B weights matrix is the most basic of the three, as it employs a binary weighting scheme, whereby each neighbour is given a weight of 1, and all other polygons are given a weight of 0 (see figures above). A W weights matrix employs a row standardized weighting scheme, with each neighbour given equal weights that sum to 1 [11]. Comparatively, a C weights matrix is a globally standardized method of weighting, with all neighbours given equal weight across the entire study area [13].
-
-Creating a weights matrix in R uses the “nb2listw” function from the “spdep” library. We can apply this function to the vri.nb variable created above, as it contains all of the neighbour links to which we want to assign weights. Additionally, if there are any polygons in our file with zero neighbour links, we still want the program to run. Therefore, we define “zero.policy” as equal to “TRUE”, which assigns weights vectors of zero length for regions with no neighbours [13]. Subsequently, we can print off our list of weights matrices (“print.listw”) in order to assess the distribution of weights for each observation (i) and its neighbours (j). The example of code below is using a weights matrix of type W. You can read more about the different styles of spatial weighting [here](https://r-spatial.github.io/spdep/reference/nb2listw.html).
+We can also create a weighted matrix file to further examine our income and French knowledge weights.
 
 ```{r Final weights, echo=TRUE, eval=TRUE, warning=FALSE}
 #Create Income weights matrix
@@ -277,7 +273,9 @@ eIFrench <- miFrench$estimate[[2]]
 varFrench <- miFrench$estimate[[3]]
 ```
 
-Describe the results
+Taking a look at the values produced in our “environment” pane will show us the results of this step. To determine if your pattern is clustered, random, or dispersed you will want to consider both the “eI” for both variables and “mI” for both variables. In general, if your mI value is greater than your eI value, your pattern will exhibit positive autocorrelation and if it is below, it will exhibit negative spatial autocorrelation. In this example both of our variables exhibit positive spatial autocorrelation as eIIncome (-0.0065) < mIIcome (0.3129) and eIFrench (-0.0065) < mIFrench (0.1346).
+
+We can also calculate the range for our Global Moran's I
 
 ```{r Global Morans Range, echo=TRUE, eval=TRUE, warning=FALSE}
 #Function to calculate the range of global Moran's I
@@ -291,8 +289,6 @@ range <- moran.range(Income.lw)
 minRange <- range[1]
 maxRange <- range[2]
 ```
-
-Taking a look at the values produced in our “environment” pane will show us the results of this step. To determine if your pattern is clustered, random, or dispersed you will want to consider both the “eI” for both variables and “mI” for both variables. In general, if your mI value is greater than your eI value, your pattern will exhibit positive autocorrelation and if it is below, it will exhibit negative spatial autocorrelation. In this example both of our variables exhibit positive spatial autocorrelation as eIIncome (-0.0065) < mIIcome (0.3129) and eIFrench (-0.0065) < mIFrench (0.1346).
 
 Although the Global Moran’s I statistic is a good indicator of our point pattern as being custard, random, or dispersed, it is important to determine if these conclusions are statistically significant. Performing a Z-test is the best way to make this determination. In this case, our null hypothesis states that our point pattern exhibits no spatial autocorrelation, our alternative hypothesis 1 states that our point pattern exhibits a positive spatial autocorrelation (clustered), and our  alternative hypothesis 2 states that our point pattern exhibits a negative spatial autocorrelation (dispersed) . This test would be considered a “two-tailed test” because we will accept either of our alternative hypotheses if our pattern is significantly clustered or dispersed. If we want to make our conclusions with 95% confidence, we would use an α value of 0.05. This would mean that if our Z-score is greater than 1.96 then our pattern is significantly clustered and we can accept our alternative hypothesis 1. Alternatively, if our Z-score is lower than -1.96, our pattern is significantly dispersed (exhibits negative autocorrelation) and we can accept our alternative hypothesis 2.
 
@@ -314,9 +310,7 @@ The Local Moran’s I Statistic is very similar to the global statistic in the s
 
 Similar to the global calculation, the Local Moran’s I formula looks intimidating but simply works by rearranging the same features to produce its outputs. 
 
-$$
-I_i = \frac{x_i - \bar{x}}{S_i^2}\sum{_{j=1}^n}W_{i,j}(x_j - \bar{x})\space \space where \space \space S_i^2 = \frac{\sum_{i=1}^n (x_i - \bar{x})^2}{n-1} 
-$$
+![image](https://github.com/user-attachments/assets/97161861-4395-43a5-9959-7ba8f01c3900)
 
 Just like the global calculation, R makes calculating the local statistic very easy by simply using the “localmoarn” function:
 
