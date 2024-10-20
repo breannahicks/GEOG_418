@@ -190,7 +190,7 @@ French.net2 <- nb2lines(French.nb2, coords=st_coordinates(st_centroid(French_noN
 crs(French.net2) <- crs(French_noNA)
 ```
 
-Explain how the maps below are created and what they show.
+Now we can create maps showing connectivity webs of neighbors using both neighborhood schemes. This is done by using the result of the last step to connect the centroid of each dissemination area with the controids of its selected neighbors. You can see in the combined map below that the rook neighborhood selected fewer neighbors than the queens neighborhood.
 
 ```{r Neighboursmap, echo=TRUE, eval=TRUE, warning=FALSE, fig.cap="Fredericton census dissemination areas showing median total income neighbours queens weight (left)  rooks weight (middle) and the combination of the two (right)."}
 
@@ -198,16 +198,13 @@ Explain how the maps below are created and what they show.
 IncomeQueen <- tm_shape(Income_noNA) +
   tm_borders(col = 'lightgrey') +
   tm_shape(Income.net) +
-  tm_lines(col = 'blue') +
+  tm_lines(col = 'blue', ldw = 2) +
   tm_layout(
     main.title = "Income Distribution using Queen Neighbourhood",
     main.title.size = 0.5,  # Adjust the size of the title
   )
 
 #Make rooks map
-IncomeRook <- tm_shape(Income_noNA) + tm_borders(col='lightgrey') + 
-              tm_shape(Income.net2) + tm_lines(col='blue', lwd = 2)
-
 IncomeRook <- tm_shape(Income_noNA) +
   tm_borders(col = 'lightgrey') +
   tm_shape(Income.net2) +
