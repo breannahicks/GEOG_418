@@ -1,4 +1,4 @@
-# Analyzing Spatial Autocorrelation in R (GEOG 418 - Lab 3)
+# Analyzing Spatial Autocorrelation in R
 ## Introduction
 
 Spatial autocorrelation is a helpful tool to assist in any spatial analysis you may seek to do. It works to assess whether a point pattern is clustered, random, or dispersed by investigating a set of features with a specific attribute (ESRI, n.d.). Spatial autocorrelation is related to Tobler’s Law of geography which states that “Everything is related to everything else, but near things are more related than distant things” (Tobler, 1970). The pattern that Tobler mentions would mean it is positively autocorrelated and exhibits a clustered pattern. This tends to be the most common type of point pattern seen in nature. In contrast, the opposite of Tobler’s law would mean that near things are less related than distant things. This pattern would mean it is negatively autocorrelated and exhibits a dispersed pattern. It is not common to see a pattern that is significantly dispersed in nature. Patterns that are not clustered or dispersed are therefore random and exhibit no spatial autocorrelation. 
