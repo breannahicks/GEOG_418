@@ -273,7 +273,7 @@ eIFrench <- miFrench$estimate[[2]]
 varFrench <- miFrench$estimate[[3]]
 ```
 
-Taking a look at the values produced in our “environment” pane will show us the results of this step. To determine if your pattern is clustered, random, or dispersed you will want to consider both the “eI” for both variables and “mI” for both variables. In general, if your mI value is greater than your eI value, your pattern will exhibit positive autocorrelation and if it is below, it will exhibit negative spatial autocorrelation. In this example both of our variables exhibit positive spatial autocorrelation as eIIncome (-0.0065) < mIIcome (0.3129) and eIFrench (-0.0065) < mIFrench (0.1346).
+Taking a look at the values produced in our “environment” pane will show us the results of this step. To determine if your pattern is clustered, random, or dispersed you will want to consider both the “eI” for both variables and “mI” for both variables. In general, if your mI value is greater than your eI value, your pattern will exhibit positive autocorrelation and if it is below, it will exhibit negative spatial autocorrelation. In this example both of our variables exhibit positive spatial autocorrelation as eIIncome (-0.0065) < mIIncome (0.3129) and eIFrench (-0.0065) < mIFrench (0.1346).
 
 We can also calculate the range for our Global Moran's I
 
@@ -302,7 +302,7 @@ zIncome <- (mIIncome - eIIncome) / (sqrt(varIncome))
 zFrench <- (mIFrench - eIFrench) / (sqrt(varFrench))
 ```
 
-By calculating these Z-scores for both variables, it further confirms that their positive spatial autocorrelation is significant as zIcome = 6.46 and zFrench = 7.90.
+By calculating these Z-scores for both variables, it further confirms that their positive spatial autocorrelation is significant as zIncome = 6.46 and zFrench = 7.90.
 
 ## Local spatial autocorrelation
 
